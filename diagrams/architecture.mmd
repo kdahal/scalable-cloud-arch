@@ -1,0 +1,12 @@
+graph TD
+    A[User] --> B[ALB Load Balancer]
+    B --> C[Kubernetes Ingress]
+    C --> D[Pods: My-App Deployment<br>Replicas: 3-10<br>Resources: Optimized CPU/Mem<br>Health Checks]
+    D --> E[Horizontal Pod Autoscaler<br>Target: 50% CPU]
+    D --> F[PostgreSQL Service<br>Multi-AZ Persistent Volume]
+    G[EKS Cluster<br>Nodes: t3.medium Spot<br>Min:2 Max:5] --> D
+    H[Terraform Provisioning<br>VPC, Subnets, IAM] --> G
+    I[Monitoring: CloudWatch/Prometheus<br>Alerts for Uptime/Efficiency] --> G
+    J[CI/CD: GitHub Actions<br>Rolling Updates] --> H
+    style D fill:#f9f,stroke:#333
+    style G fill:#bbf,stroke:#333
