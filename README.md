@@ -95,15 +95,18 @@ jobs:
 
 3. Monitoring Setup:
 
-Add a kubernetes/monitoring directory with Prometheus and Grafana configurations to showcase observability.
-Example: Include a prometheus.yaml for scraping metrics and a note on setting up CloudWatch alarms for 99.9% uptime monitoring.
+* Add a kubernetes/monitoring directory with Prometheus and Grafana configurations to showcase observability.
+* Example: Include a prometheus.yaml for scraping metrics and a note on setting up CloudWatch alarms for 99.9% uptime monitoring.
 
 
 4. Database Configuration:
 
-Expand terraform/main.tf to include an RDS instance for PostgreSQL with multi-AZ enabled.
-Example:
-hclresource "aws_db_instance" "postgres" {
+* Expand terraform/main.tf to include an RDS instance for PostgreSQL with multi-AZ enabled.
+* Example:
+
+hcl
+```
+resource "aws_db_instance" "postgres" {
   allocated_storage    = 20
   engine               = "postgres"
   instance_class       = "db.t3.micro"
@@ -113,20 +116,23 @@ hclresource "aws_db_instance" "postgres" {
   password             = var.db_password  # Use Secrets Manager
   vpc_security_group_ids = [aws_security_group.db.id]
 }
-
+```
 
 
 5. Testing and Validation:
 
-Add a tests/ directory with scripts for load testing (e.g., using Locust) and uptime validation (e.g., checking CloudWatch metrics).
-Example: A locustfile.py to simulate traffic and validate scaling.
+* Add a tests/ directory with scripts for load testing (e.g., using Locust) and uptime validation (e.g., checking CloudWatch metrics).
+* Example: A locustfile.py to simulate traffic and validate scaling.
 
 
 6. Security Enhancements:
 
-Include a kubernetes/network-policy.yaml to restrict pod-to-pod communication.
-Example:
-yamlapiVersion: networking.k8s.io/v1
+* Include a kubernetes/network-policy.yaml to restrict pod-to-pod communication.
+* Example:
+
+yaml
+```
+apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: app-network-policy
@@ -144,23 +150,26 @@ spec:
     ports:
     - protocol: TCP
       port: 8080
-
+```
 
 
 7. Cost Analysis:
 
-Add a docs/cost-analysis.md to document how spot instances, right-sized resources, and HPA contribute to 25% efficiency gains (e.g., based on AWS pricing models or benchmarks).
+* Add a docs/cost-analysis.md to document how spot instances, right-sized resources, and HPA contribute to 25% efficiency gains (e.g., based on AWS pricing models or benchmarks).
 
 
 8. Backup and Recovery:
 
-Include a Velero setup for Kubernetes backups in kubernetes/backup.yaml to showcase disaster recovery capabilities.
+* Include a Velero setup for Kubernetes backups in kubernetes/backup.yaml to showcase disaster recovery capabilities.
 
 
 
 Recommendations
 
-Immediate Action: Save the provided Mermaid diagram as diagrams/architecture.mmd and test rendering in Mermaid Live or your README. This completes the missing piece from your repository.
-Next Steps: Prioritize adding the CI/CD workflow (.github/workflows/deploy.yaml) and database configuration (terraform/main.tf) to make the project more robust and demonstrable. These showcase automation and production readiness effectively.
-Optional: If you want to emphasize monitoring or security, add Prometheus/Grafana configs or network policies, respectively. These are high-impact for production-grade projects.
-Image Generation: If you want a visual PNG/SVG of the diagram, confirm, and I can guide you on rendering it via Mermaid CLI or provide a description for manual export from Mermaid Live.
+* Immediate Action: Save the provided Mermaid diagram as diagrams/architecture.mmd and test rendering in Mermaid Live or your README. This completes the missing piece from your repository.
+
+* Next Steps: Prioritize adding the CI/CD workflow (.github/workflows/deploy.yaml) and database configuration (terraform/main.tf) to make the project more robust and demonstrable. These showcase automation and production readiness effectively.
+
+* Optional: If you want to emphasize monitoring or security, add Prometheus/Grafana configs or network policies, respectively. These are high-impact for production-grade projects.
+
+* Image Generation: If you want a visual PNG/SVG of the diagram, confirm, and I can guide you on rendering it via Mermaid CLI or provide a description for manual export from Mermaid Live.
