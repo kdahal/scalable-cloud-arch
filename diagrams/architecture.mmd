@@ -1,12 +1,15 @@
 graph TD
-    A[User] --> B[ALB Load Balancer]
-    B --> C[Kubernetes Ingress]
-    C --> D[Pods: My-App Deployment<br>Replicas: 3-10<br>Resources: Optimized CPU/Mem<br>Health Checks]
-    D --> E[Horizontal Pod Autoscaler<br>Target: 50% CPU]
-    D --> F[PostgreSQL Service<br>Multi-AZ Persistent Volume]
-    G[EKS Cluster<br>Nodes: t3.medium Spot<br>Min:2 Max:5] --> D
-    H[Terraform Provisioning<br>VPC, Subnets, IAM] --> G
-    I[Monitoring: CloudWatch/Prometheus<br>Alerts for Uptime/Efficiency] --> G
-    J[CI/CD: GitHub Actions<br>Rolling Updates] --> H
-    style D fill:#f9f,stroke:#333
-    style G fill:#bbf,stroke:#333
+    A[User] -->|HTTPS| B[ALB Load Balancer<br>Multi-AZ]
+    B --> C[Kubernetes Ingress<br>ALB Controller]
+    C --> D[Pods: My-App Deployment<br>Replicas: 3-10<br>CPU: 250m-500m<br>Mem: 512Mi-1Gi<br>Liveness Probes]
+    D --> E[Horizontal Pod Autoscaler<br>Target: 50% CPU Utilization]
+    D --> F[PostgreSQL Service<br>Multi-AZ RDS Instance<br>Persistent Storage]
+    G[EKS Cluster<br>Nodes: t3.medium Spot<br>Min: 2, Max: 5<br>Multi-AZ] --> D
+    H[Terraform Provisioning<br>VPC, Subnets, IAM Roles<br>Region: us-west-2] --> G
+    I[Monitoring: CloudWatch/Prometheus<br>Alerts: Uptime, Resource Usage<br>Grafana Dashboards] --> G
+    J[CI/CD: GitHub Actions<br>Rolling Updates, Automated Builds] --> H
+    K[Secrets Management<br>AWS Secrets Manager<br>Kubernetes Secrets] --> D
+    style D fill:#f9f,stroke:#333,stroke-width:2px
+    style G fill:#bbf,stroke:#333,stroke-width:2px
+    style F fill:#dfd,stroke:#333
+    style I fill:#ffb,stroke:#333

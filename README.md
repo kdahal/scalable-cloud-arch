@@ -29,6 +29,8 @@ See diagrams/architecture.mmd for details.
 - Load test with tools like Apache Bench or Locust.
 - Monitor uptime with AWS CloudWatch alarms.
 
+## Architecture
+See simple diagrams/architecture
 ```mermaid
 graph TD
     A[User] --> B[ALB Load Balancer]
@@ -42,3 +44,5 @@ graph TD
     J[CI/CD: GitHub Actions<br>Rolling Updates] --> H
     style D fill:#f9f,stroke:#333
     style G fill:#bbf,stroke:#333
+
+## Additional Instruction
