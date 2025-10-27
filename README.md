@@ -2,7 +2,7 @@
 
 This repository contains Terraform scripts and Kubernetes manifests for deploying a scalable web application on AWS EKS, achieving 99.9% uptime and 25% resource efficiency improvement.
 
-# Scalable Cloud Architecture
+### Scalable Cloud Architecture
 
 This repo deploys a scalable web app on AWS EKS with RDS PostgreSQL, using Terraform for IaC and Kubernetes manifests for the app (HPA, Ingress, NetworkPolicy).
 
