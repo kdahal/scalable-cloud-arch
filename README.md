@@ -2,6 +2,27 @@
 
 This repository contains Terraform scripts and Kubernetes manifests for deploying a scalable web application on AWS EKS, achieving 99.9% uptime and 25% resource efficiency improvement.
 
+# Scalable Cloud Architecture
+
+This repo deploys a scalable web app on AWS EKS with RDS PostgreSQL, using Terraform for IaC and Kubernetes manifests for the app (HPA, Ingress, NetworkPolicy).
+
+## Architecture
+- **VPC**: Multi-AZ with public/private subnets.
+- **EKS**: Managed cluster with spot t3.medium nodes (2–5 scaling).
+- **App**: Sample Node.js web app with HPA (50% CPU threshold).
+- **DB**: Multi-AZ PostgreSQL for 99.9% uptime.
+- **Efficiency**: Spot instances save ~25% costs.
+
+## Quick Start
+1. `cd terraform && terraform init && terraform plan && terraform apply`.
+2. `cd .. && kubectl apply -f kubernetes/`.
+3. Test: `curl http://<ALB-DNS>/`.
+
+## Cleanup
+`cd terraform && terraform destroy`.
+
+See diagrams/architecture.mmd for visualization.
+
 ## Prerequisites
 - AWS account with IAM user (admin access).
 - Terraform >=1.0 installed.
@@ -9,7 +30,7 @@ This repository contains Terraform scripts and Kubernetes manifests for deployin
 - AWS CLI configured with credentials.
 
 ## Deployment Steps
-1. Clone the repo: `git clone https://github.com/yourusername/scalable-cloud-arch.git`
+1. Clone the repo: `git clone https://github.com/kdahal/scalable-cloud-arch.git`
 2. Navigate to terraform/: `cd terraform`
 3. Initialize: `terraform init`
 4. Plan: `terraform plan`
@@ -161,7 +182,6 @@ spec:
 8. Backup and Recovery:
 
 * Include a Velero setup for Kubernetes backups in kubernetes/backup.yaml to showcase disaster recovery capabilities.
-
 
 
 Recommendations

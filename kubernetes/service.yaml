@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: app-service
 spec:
-  selector:
-    app: my-app
+  type: LoadBalancer
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-  type: LoadBalancer  # For external access and HA
+  - port: 80
+    targetPort: 80  # Matches Nginx
+    protocol: TCP
+  selector:
+    app: my-app  # Matches deployment labels
